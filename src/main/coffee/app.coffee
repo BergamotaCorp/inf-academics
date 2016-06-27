@@ -1,0 +1,2 @@
+app = () ->
+  alert "hello, world!" 

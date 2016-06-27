@@ -1,0 +1,25 @@
+{
+  "name": "inf-adademics",
+  "version": "1.0.0",
+  "description": "Inf Academics by Bergamota Corp",
+  "authors": [
+    "Fabrizio Marmitt <fabrizio@marmitt.com.br>",
+    "Junior Alves <junior.ms@gmail.com>",
+    "Robson Segoa <robson.sevenmkt@gmail.com>",
+    "Tiago Steiner <tiago.steiner@gmail.com>"
+  ],
+  "main": "Gulpfile.js",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1",
+    "gulp-coffee": "^2.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

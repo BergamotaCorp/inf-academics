@@ -1,0 +1,23 @@
+{
+  "name": "bergamota.co/inf-academics",
+  "authors": [
+    "Fabrizio Marmitt <fabrizio@marmitt.com.br>",
+    "Junior Alves <junior.ms@gmail.com>",
+    "Robson Segoa <robson.sevenmkt@gmail.com>",
+    "Tiago Steiner <tiago.steiner@gmail.com>"
+  ],
+  "description": "Inf Academics by Bergamota Corp",
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "homepage": "https://bertgamotacorp.github.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.2"
+  }
+}
