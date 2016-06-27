@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @EnableAutoConfiguration
-public class SampleController {
-    @RequestMapping("/{name}")
-    public String indexAction (ModelMap model, @PathVariable("name") String name) {
-        model.addAttribute("name", name);
-        return "index";
+@RequestMapping(value = {"/","/home"})
+public class HomeController {
+    @RequestMapping( value = {"/", "/index"})
+    public String indexAction (ModelMap model) {
+        model.addAttribute("name", "world");
+        return "home/index";
     }
 }

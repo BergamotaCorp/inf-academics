@@ -7,7 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("com.h2database:h2:1.4.191")
+		classpath("mysql:mysql-connector-java:5.1.16")
 	}
 }
 
@@ -17,13 +17,12 @@ plugins {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot' 
 apply plugin: 'war'
 
 flyway {
-    url = 'jdbc:h2:file:./data/infacademics;MV_STORE=FALSE;MVCC=FALSE;IFEXISTS=TRUE'
-    user = 'sa'
+    url = 'jdbc:mysql://localhost/infacademics'
+    user = 'root'
 }
 
 war {
@@ -46,21 +45,19 @@ configurations {
 }
 
 dependencies {
-    compile("com.h2database:h2:1.4.191")
+    compile("mysql:mysql-connector-java:5.1.16")
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile 'org.jtwig:jtwig-spring-boot-starter:5.54'
 	compile("org.springframework:spring-jdbc")
     compile 'com.google.guava:guava:19.0'
+	compile("org.springframework.boot:spring-boot-devtools")
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
-eclipse {
-	classpath {
-		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-	}
+bootRun {
+    addResources = true
 }
 
 task wrapper(type: Wrapper) {
