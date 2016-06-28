@@ -1,26 +1,23 @@
 package co.bergamota.controllers;
 
-import co.bergamota.business.objects.Book;
-import co.bergamota.business.objects.Greeting;
-import co.bergamota.dataaccess.BookRepository;
+import co.bergamota.business.objects.Usuario;
+import co.bergamota.dataaccess.UsuarioRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @RequestMapping("/api")
 public class ApiController {
     @Autowired
-    BookRepository bookRepository;
+    UsuarioRepository usuarioRepository;
 
-    @RequestMapping("/book/getBooks")
-    public ArrayList<Book> books() {
-        return Lists.newArrayList(bookRepository.findAll());
+    @RequestMapping("/usuarios/getAll")
+    public ArrayList<Usuario> getUsuarios() {
+        return Lists.newArrayList(usuarioRepository.findAll());
     }
 
 }
