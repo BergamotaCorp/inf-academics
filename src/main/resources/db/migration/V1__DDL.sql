@@ -33,6 +33,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `infacademics`.`usuario` (
   `nomeusuario` VARCHAR(50) NOT NULL,
+  `senha` VARCHAR(50) NOT NULL,
   `ativo` TINYINT(1) NULL,
   `datacriacao` DATETIME NULL,
   `idpesquisador` INT NOT NULL,

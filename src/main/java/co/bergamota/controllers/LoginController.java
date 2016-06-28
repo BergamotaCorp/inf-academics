@@ -7,10 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @EnableAutoConfiguration
-@RequestMapping("/login")
 public class LoginController {
-    @RequestMapping( value = {"/", "/index"})
-    public String indexAction (ModelMap model) {
-        return "login/index";
+    @RequestMapping("/login")
+    public String loginAction (ModelMap model) {
+        return "login/login";
+    }
+
+    @RequestMapping("/logout")
+    public String logoutAction (ModelMap model) {
+        return "login/logout";
     }
 }

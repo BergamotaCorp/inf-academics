@@ -21,4 +21,4 @@ INSERT INTO pesquisador VALUES(3, 'Robson Segoa', '2016-06-28 08:48:32');
 INSERT INTO pesquisador VALUES(4, 'Tiago Steiner', '2016-06-28 08:48:32');
 
 -- Usuários
-INSERT INTO usuario VALUES('fabriziomarmitt', 1, '2016-06-28 08:48:32', 1);
+INSERT INTO usuario VALUES('fabriziomarmitt','123456', 1, '2016-06-28 08:48:32', 1);
