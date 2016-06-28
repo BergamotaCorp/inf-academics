@@ -11,6 +11,22 @@ import java.util.Date;
 public class TipoPublicacao {
     @Id
     private long idtipopublicacao;
+    private String nometipopublicacao;
+    
+    public long getIdTipopublicacao() {
+        return idtipopublicacao;
+    }
 
+    public void setIdpublicacao(long idtipopublicacao) {
+        this.idtipopublicacao = idtipopublicacao;
+    }
+    
+    public String getNomeTipopublicacao() {
+        return nometipopublicacao;
+    }
+
+    public void setNomeTipopublicacao(String nometipopublicacao) {
+        this.nometipopublicacao = nometipopublicacao;
+    }
 
 }
