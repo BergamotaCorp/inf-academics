@@ -1,44 +1,56 @@
 package co.bergamota.business.objects;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 
 @Entity
 @Table(name = "publicacaocampos")
 public class PublicacaoCampos {
 	
-	    @Id
-	    private long idpublicacaocampos;
-	    private String nomecampo;
-	    private long idpublicacao;
+	@Id
+	private long idpublicacaocampos;
+	private String nomecampo;
+	private String valorcampo;
 
-	    public long getIdPublicacaoCampos() {
-	        return idpublicacaocampos;
-	    }
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idpublicacao")
+	@JsonBackReference
+	private Publicacao publicacao;
 
-	    public void setIdPublicacaoCampos(long idpublicacaocampos) {
-	        this.idpublicacaocampos = idpublicacaocampos;
-	    }
+	public long getIdpublicacaocampos() {
+		return idpublicacaocampos;
+	}
 
-	    public String getNomeCampo() {
-	        return nomecampo;
-	    }
+	public void setIdpublicacaocampos(long idpublicacaocampos) {
+		this.idpublicacaocampos = idpublicacaocampos;
+	}
 
-	    public void setNomeCampo(String nomecampo) {
-	        this.nomecampo = nomecampo;
-	    }
-	    
-	    public long getIdPublicacao() {
-	        return idpublicacao;
-	    }
+	public String getNomecampo() {
+		return nomecampo;
+	}
 
-	    public void setIdPublicacao(long idpublicacao) {
-	        this.idpublicacao = idpublicacao;
-	    }
+	public void setNomecampo(String nomecampo) {
+		this.nomecampo = nomecampo;
+	}
 
-	    
+	public String getValorcampo() {
+		return valorcampo;
+	}
 
+	public void setValorcampo(String valorcampo) {
+		this.valorcampo = valorcampo;
+	}
+
+	public Publicacao getPublicacao() {
+		return publicacao;
+	}
+
+	public void setPublicacao(Publicacao publicacao) {
+		this.publicacao = publicacao;
+	}
 }

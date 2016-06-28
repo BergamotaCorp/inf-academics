@@ -1,32 +1,42 @@
 package co.bergamota.business.objects;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "publicacao")
 public class Publicacao {
     @Id
     private long idpublicacao;
-    private long idtipopublicacao;
     private String nomepublicacao;
     private String atributos;
     private Integer ano;
     private Date datacadastro;
+    @OneToMany(mappedBy="publicacao")
+    @JsonManagedReference
+    private List<PublicacaoCampos> campos;
+    @ManyToMany
+    @JoinTable(name = "publicacaopesquisador",
+            joinColumns = {@JoinColumn(name = "idpublicacao")},
+            inverseJoinColumns = {@JoinColumn(name = "idpesquisador")}
+    )
+    @JsonManagedReference
+    private List<Pesquisador> pesquisadores;
+
+    @OneToOne(mappedBy = "publicacao")
+    @JsonManagedReference
+    private TipoPublicacao tipoPublicacao;
+
     public long getIdpublicacao() {
         return idpublicacao;
     }
     public void setIdpublicacao(long idpublicacao) {
         this.idpublicacao = idpublicacao;
-    }
-    public long getIdtipopublicacao() {
-        return idtipopublicacao;
-    }
-    public void setIdtipopublicacao(long idtipopublicacao) {
-        this.idtipopublicacao = idtipopublicacao;
     }
     public String getNomepublicacao() {
         return nomepublicacao;
@@ -51,5 +61,21 @@ public class Publicacao {
     }
     public void setDatacadastro(Date datacadastro) {
         this.datacadastro = datacadastro;
+    }
+
+    public List<PublicacaoCampos> getCampos() {
+        return campos;
+    }
+
+    public void setCampos(List<PublicacaoCampos> campos) {
+        this.campos = campos;
+    }
+
+    public TipoPublicacao getTipoPublicacao() {
+        return tipoPublicacao;
+    }
+
+    public void setTipoPublicacao(TipoPublicacao tipoPublicacao) {
+        this.tipoPublicacao = tipoPublicacao;
     }
 }

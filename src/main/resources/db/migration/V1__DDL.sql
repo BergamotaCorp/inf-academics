@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `infacademics`.`usuario` (
   UNIQUE INDEX `NomeUsuario_UNIQUE` (`nomeusuario` ASC),
   INDEX `fk_Usuario_Pesquisador_idx` (`idpesquisador` ASC),
   PRIMARY KEY (`idpesquisador`),
-  CONSTRAINT `fk_Usuario_pesquisador`
+  CONSTRAINT `fk_usuario_pesquisador`
     FOREIGN KEY (`idpesquisador`)
     REFERENCES `infacademics`.`pesquisador` (`idpesquisador`)
     ON DELETE NO ACTION
@@ -83,10 +83,11 @@ ENGINE = InnoDB;
 -- Table `infacademics`.`PublicacaoCampos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `infacademics`.`publicacaocampos` (
-  `idtpublicacaocampos` INT NOT NULL,
+  `idpublicacaocampos` INT NOT NULL,
   `nomecampo` TEXT NULL,
+  `valorcampo` TEXT NULL,
   `idpublicacao` INT NOT NULL,
-  PRIMARY KEY (`idtpublicacaocampos`),
+  PRIMARY KEY (`idpublicacaocampos`),
   INDEX `fk_publicacaocampos_publicacao1_idx` (`idpublicacao` ASC),
   CONSTRAINT `fk_publicacaocampos_publicacao1`
     FOREIGN KEY (`idpublicacao`)
