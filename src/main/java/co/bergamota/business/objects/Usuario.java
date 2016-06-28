@@ -1,27 +1,29 @@
 package co.bergamota.business.objects;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "usuario")
 public class Usuario {
     @Id
-    private long idpesquisador;
+    private long idusuario;
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idpesquisador")
+    private Pesquisador pesquisador;
     private String nomeusuario;
     private String senha;
     private boolean ativo;
     private Date datacriacao;
 
-    public long getIdpesquisador() {
-        return idpesquisador;
+    public long getIdusuario() {
+        return idusuario;
     }
 
-    public void setIdpesquisador(long idpesquisador) {
-        this.idpesquisador = idpesquisador;
+    public void setIdusuario(long idusuario) {
+        this.idusuario = idusuario;
     }
 
     public String getNomeusuario() {
