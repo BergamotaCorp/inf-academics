@@ -2,6 +2,7 @@ package co.bergamota.business.objects;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -37,7 +38,7 @@ public class Usuario {
         this.nomeusuario = nomeusuario;
     }
     public String getSenha() {
-        return senha;
+        return new BCryptPasswordEncoder().encode(senha);
     }
     public void setSenha(String senha) {
         this.senha = senha;
