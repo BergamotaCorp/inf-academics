@@ -22,9 +22,8 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 flyway {
-    url = 'jdbc:mysql://172.17.0.2/infacademics'
-    user = 'infacademics'
-    password = '123456'
+    url = 'jdbc:mysql://localhost/infacademics'
+    user = 'root'
 }
 
 jar {
