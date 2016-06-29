@@ -1,0 +1,30 @@
+{% extends "classpath:/templates/layout.twig" %}
+
+{% block title %}Cadastrar Publicação{% endblock %}
+{% block head %}{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <form method="post" action="/cadastrar-publicacao">
+            <input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"/>
+            <fieldset class="form-group">
+                <label for="nomepesquisador">Nome Completo</label>
+                <input type="text" class="form-control" id="nomepesquisador" name="nomepesquisador" placeholder="Nome Completo">
+                <small class="text-muted">Ex.: Fulano Da Silva</small>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="nomeusuario">Nome de Usuário</label>
+                <input type="text" class="form-control" id="nomeusuario" name="nomeusuario" placeholder="Nome de Usuário">
+                <small class="text-muted">Nome de usuário necessário para fazer login no sistema</small>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                <small class="text-muted">Senha para fazer login no sistema</small>
+            </fieldset>
+            <button type="submit" class="btn btn-primary pull-xs-right">SignUp</button>
+            <span class="clearfix"></span>
+            <hr>
+        </form>
+    </div><!--/.container-->
+{% endblock %}

@@ -11,7 +11,6 @@ import java.util.Date;
 @Table(name = "usuario")
 public class Usuario {
     @Id
-    @GeneratedValue
     @Column(name = "idpesquisador")
     private long idusuario;
     private String nomeusuario;
@@ -38,7 +37,7 @@ public class Usuario {
         this.nomeusuario = nomeusuario;
     }
     public String getSenha() {
-        return new BCryptPasswordEncoder().encode(senha);
+        return senha == null ? "" : new BCryptPasswordEncoder().encode(senha);
     }
     public void setSenha(String senha) {
         this.senha = senha;
@@ -59,6 +58,7 @@ public class Usuario {
         return pesquisador;
     }
     public void setPesquisador(Pesquisador pesquisador) {
+        this.idusuario = pesquisador.getIdpesquisador();
         this.pesquisador = pesquisador;
     }
 }

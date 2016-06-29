@@ -26,7 +26,9 @@ import java.util.Collection;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/**", "/js/**").permitAll();
+        http.authorizeRequests()
+                .antMatchers("/css/**", "/js/**", "/signup", "/api/publicacoes/getAll", "/api/publicacoes/getAll", "/api/publicacoes/search/**")
+                .permitAll();
         http
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
