@@ -31,7 +31,8 @@ gulp.task("components", function () {
     gulp.src([
             `${paths.components}/jquery/dist/jquery.min.js`,
             `${paths.components}/jquery/sizzle/dist/sizzle.min.js`,
-            `${paths.components}/bootstrap-sass/**/bootstrap.min.js`
+            `${paths.components}/bootstrap-sass/**/bootstrap.min.js`,
+            `${paths.components}/bootstrap-tokenfield/dist/bootstrap-tokenfield.min.js`
         ])
         .pipe(concat('components.js'))
         .pipe(gulp.dest(`${paths.dist}/js/`))

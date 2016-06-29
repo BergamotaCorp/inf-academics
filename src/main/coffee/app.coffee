@@ -1,6 +1,3 @@
-app = () ->
-  alert "hello, world!"
-
 
 class Publicacoes
   constructor : () ->
