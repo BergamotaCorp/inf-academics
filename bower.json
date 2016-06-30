@@ -17,10 +17,9 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "bootstrap": "v4.0.0-alpha.2"
-  },
   "devDependencies": {
-    "bootstrap-tokenfield": "^0.12.1"
+    "bootstrap": "v4.0.0-alpha.2",
+    "magicsuggest": "^2.1.4",
+    "tether": "^1.3.2"
   }
 }

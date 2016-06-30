@@ -62,7 +62,7 @@ ENGINE = InnoDB;
 -- Table `infacademics`.`Publicacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `infacademics`.`publicacao` (
-  `idpublicacao` INT NOT NULL,
+  `idpublicacao` INT NOT NULL AUTO_INCREMENT,
   `idtipopublicacao` INT NOT NULL,
   `nomepublicacao` VARCHAR(400) NULL,
   `datacadastro` DATETIME NULL,
@@ -83,7 +83,7 @@ ENGINE = InnoDB;
 -- Table `infacademics`.`PublicacaoCampos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `infacademics`.`publicacaocampos` (
-  `idpublicacaocampos` INT NOT NULL,
+  `idpublicacaocampos` INT NOT NULL AUTO_INCREMENT,
   `nomecampo` TEXT NULL,
   `valorcampo` TEXT NULL,
   `idpublicacao` INT NOT NULL,

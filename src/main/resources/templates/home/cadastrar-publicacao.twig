@@ -9,24 +9,24 @@
             <input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"/>
             <fieldset class="form-group">
                 <label for="idpesquisador">Pesquisadores</label>
-                <input type="text" class="form-control" id="idpesquisador" name="idpesquisador" placeholder="Pesquisadores">
+                <input type="text" class="form-control" id="idpesquisador" name="idpesquisador" placeholder="Pesquisadores" required>
             </fieldset>
             <fieldset class="form-group">
                 <label for="idtipopublicacao">Tipo de Publicação</label>
-                <input type="text" class="form-control" id="idtipopublicacao" name="idtipopublicacao" placeholder="Tipo de Publicação">
+                <input type="text" class="form-control" id="idtipopublicacao" name="idtipopublicacao" placeholder="Tipo de Publicação" required>
                 <small class="text-muted">Ex.: Artigo, Livro, etc</small>
             </fieldset>
             <fieldset class="form-group">
                 <label for="nomepublicacao">Título da Publicação</label>
-                <input type="text" class="form-control" id="nomepublicacao" name="nomepublicacao" placeholder="Título da Publicação">
+                <input type="text" class="form-control" id="nomepublicacao" name="nomepublicacao" placeholder="Título da Publicação" required>
             </fieldset>
             <fieldset class="form-group">
                 <label for="ano">Ano da Publicação</label>
-                <input type="text" class="form-control" id="ano" name="ano" placeholder="Ano da Publicação">
+                <input type="number" class="form-control" id="ano" name="ano" placeholder="Ano da Publicação" required>
             </fieldset>
             <fieldset class="form-group">
                 <label for="publicador">Publicador</label>
-                <input type="text" class="form-control" id="publicador" name="publicador" placeholder="Journal ou Evento em que foi publicado">
+                <input type="text" class="form-control" id="publicador" name="publicador" placeholder="Journal ou Evento em que foi publicado" required>
             </fieldset>
 
             <button type="submit" class="btn btn-primary pull-xs-right">Cadastrar</button>
