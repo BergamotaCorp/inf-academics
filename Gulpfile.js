@@ -29,13 +29,23 @@ gulp.task('coffee', function () {
 
 gulp.task("components", function () {
     gulp.src([
-            `${paths.components}/jquery/dist/jquery.min.js`,
-            `${paths.components}/jquery/sizzle/dist/sizzle.min.js`,
-            `${paths.components}/bootstrap-sass/**/bootstrap.min.js`
-        ])
-        .pipe(concat('components.js'))
-        .pipe(gulp.dest(`${paths.dist}/js/`))
-          .on('finish', console.log);
+        `${paths.components}/jquery/dist/jquery.min.js`,
+        `${paths.components}/tether/dist/js/tether.min.js`,
+        `${paths.components}/bootstrap/dist/js/bootstrap.min.js`,
+        `${paths.components}/magicsuggest/magicsuggest-min.js`
+    ])
+    .pipe(concat('components.js'))
+    .pipe(gulp.dest(`${paths.dist}/js/`))
+    .on('finish', console.log);
+
+    gulp.src([
+        `${paths.components}/tether/dist/css/tether.min.css`,
+        `${paths.components}/magicsuggest/magicsuggest-min.css`
+    ])
+    .pipe(concat('components.css'))
+        .pipe(gulp.dest(`${paths.dist}/css/`))
+    .on('finish', console.log);
+
 });
 
 gulp.task('install', ['sass', 'coffee','components'], function(callback){

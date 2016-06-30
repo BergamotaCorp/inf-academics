@@ -2,7 +2,7 @@
 
 ## Pré-Requisitos
 
-Node 4.4+
+Node 4.4+  
 MySQL 5.5 (Criar usuário sem root sem senha para localhost)
 
 ## Instalação

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,9 @@ import java.util.List;
 @Table(name = "publicacao")
 public class Publicacao {
     @Id
+    @GeneratedValue
     private long idpublicacao;
+    private long idtipopublicacao;
     private String nomepublicacao;
     private String atributos;
     private Integer ano;
@@ -76,6 +79,16 @@ public class Publicacao {
     }
 
     public void setTipoPublicacao(TipoPublicacao tipoPublicacao) {
+        if(tipoPublicacao != null)
+            this.idtipopublicacao = tipoPublicacao.getIdtipopublicacao();
         this.tipoPublicacao = tipoPublicacao;
+    }
+
+    public List<Pesquisador> getPesquisadores() {
+        return pesquisadores;
+    }
+
+    public void setPesquisadores(List<Pesquisador> pesquisadores) {
+        this.pesquisadores = pesquisadores;
     }
 }

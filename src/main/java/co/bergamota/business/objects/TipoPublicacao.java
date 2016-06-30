@@ -8,10 +8,9 @@ import javax.persistence.*;
 @Table(name = "tipopublicacao")
 public class TipoPublicacao {
     @Id
+    @GeneratedValue
     private long idtipopublicacao;
     private String nometipopublicacao;
-
-
     @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "idtipopublicacao")
     @JsonBackReference

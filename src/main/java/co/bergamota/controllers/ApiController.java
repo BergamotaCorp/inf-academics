@@ -2,9 +2,11 @@ package co.bergamota.controllers;
 
 import co.bergamota.business.objects.Pesquisador;
 import co.bergamota.business.objects.Publicacao;
+import co.bergamota.business.objects.TipoPublicacao;
 import co.bergamota.business.objects.Usuario;
 import co.bergamota.dataaccess.PesquisadorRepository;
 import co.bergamota.dataaccess.PublicacaoRepository;
+import co.bergamota.dataaccess.TipoPublicacaoRepository;
 import co.bergamota.dataaccess.UsuarioRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class ApiController {
     @Autowired
     PublicacaoRepository publicacaoRepository;
 
+    @Autowired
+    TipoPublicacaoRepository tipoPublicacaoRepository;
+
     @RequestMapping("/usuarios/getAll")
     public ArrayList<Usuario> getUsuarios() {
         return Lists.newArrayList(usuarioRepository.findAll());
@@ -46,5 +51,11 @@ public class ApiController {
     public ArrayList<Publicacao> searchPublicacoes(@RequestParam(value = "search") String search) {
         return Lists.newArrayList(publicacaoRepository.search(search));
     }
+
+    @RequestMapping("/tipopublicacoes/getAll")
+    public ArrayList<TipoPublicacao> getTipoPublicacoes() {
+        return Lists.newArrayList(tipoPublicacaoRepository.findAll());
+    }
+
 
 }

@@ -10,9 +10,9 @@ public interface PublicacaoRepository extends CrudRepository<Publicacao, Long>
 {
     @Query("select distinct p " +
             "from Publicacao p " +
-            "join p.campos pc " +
-            "join p.pesquisadores pe " +
-            "join p.tipoPublicacao tp " +
+            "left join p.campos pc " +
+            "left join p.pesquisadores pe " +
+            "left join p.tipoPublicacao tp " +
             "where p.nomepublicacao like %?1||'%' " +
             "or p.atributos like %?1||'%' " +
             "or p.ano like %?1||'%' " +

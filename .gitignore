@@ -133,6 +133,5 @@ node_modules/
 build/
 
 # Dist Files
-src/main/resources/static/css/app.css
-src/main/resources/static/js/components.js
-src/main/resources/static/js/app.js
+src/main/resources/static/css
+src/main/resources/static/js
