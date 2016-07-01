@@ -19,7 +19,7 @@ public class PublicacaoModelView {
     private TipoPublicacao tipopublicacao;
     private String nomepublicacao;
     private String campos;
-    private Integer anopublicacao;
+    private String anopublicacao;
     private String publicador;
     private String atributos;
 
@@ -47,7 +47,7 @@ public class PublicacaoModelView {
 
         if(request.getParameterMap().containsKey("ano[]")){
             Long _ano = tryParseLong(request.getParameter("ano[]"));
-            setAnopublicacao(_ano.intValue());
+            setAnopublicacao(_ano.toString());
         }
 
         if(request.getParameterMap().containsKey("nomepublicacao")){
@@ -107,11 +107,11 @@ public class PublicacaoModelView {
         this.campos = campos;
     }
 
-    public Integer getAnopublicacao() {
+    public String getAnopublicacao() {
         return anopublicacao;
     }
 
-    public void setAnopublicacao(Integer anopublicacao) {
+    public void setAnopublicacao(String anopublicacao) {
         this.anopublicacao = anopublicacao;
     }
 

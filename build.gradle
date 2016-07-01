@@ -55,6 +55,7 @@ dependencies {
     compile 'com.google.guava:guava:19.0'
 	compile("org.springframework.boot:spring-boot-devtools")
     compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.jbibtex:jbibtex:1.0.15")
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('junit:junit')
 }
