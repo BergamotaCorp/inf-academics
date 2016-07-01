@@ -12,7 +12,7 @@
                 <input type="text" class="form-control" id="idpesquisador" name="idpesquisador" placeholder="Pesquisadores" value="" required>
                 <script>
                     function AddPesquisadoresToSelection(){
-                        EditarPublicacao.msidpesquisador.addToSelection({{ convert_encoding(pesquisadores,'UTF-8','ISO-8859-1') }}, false);
+                        EditarPublicacao.msidpesquisador.addToSelection({{ pesquisadores }}, false);
                     }
                 </script>
             </fieldset>

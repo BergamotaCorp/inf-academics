@@ -7,7 +7,7 @@
     <div class="container detallhes-publicacao-container">
         <h1>{{ model.nomepublicacao }}</h1>
         <hr>
-        <p><b>Autores</b> {{ convert_encoding(pesquisadores,'UTF-8','ISO-8859-1')  }}</p>
+        <p><b>Autores</b> {{ pesquisadores }}</p>
         <p><b>Publicado em</b> {{ model.ano }} <b>em</b> {{ model.publicador|default('desconhecido') }}</p>
         <p><b>Publicação cadastrada em</b> {{ model.datacadastro}}</p>
         <h3>Outros Campos</h3>

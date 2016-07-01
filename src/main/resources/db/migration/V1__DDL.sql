@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `infacademics`.`pesquisador` (
   `nomepesquisador` VARCHAR(45) NOT NULL,
   `datacadastro` DATETIME NULL,
   PRIMARY KEY (`idpesquisador`))
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `infacademics`.`usuario` (
     REFERENCES `infacademics`.`pesquisador` (`idpesquisador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `infacademics`.`tipopublicacao` (
   `idtipopublicacao` INT NOT NULL AUTO_INCREMENT,
   `nometipopublicacao` VARCHAR(45) NULL,
   PRIMARY KEY (`idtipopublicacao`))
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `infacademics`.`publicacao` (
     REFERENCES `infacademics`.`tipopublicacao` (`idtipopublicacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `infacademics`.`publicacaocampos` (
     REFERENCES `infacademics`.`publicacao` (`idpublicacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -116,4 +116,4 @@ CREATE TABLE IF NOT EXISTS `infacademics`.`publicacaopesquisador` (
     REFERENCES `infacademics`.`pesquisador` (`idpesquisador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
