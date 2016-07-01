@@ -15,11 +15,11 @@ public class Publicacao {
     @Id
     @GeneratedValue
     private long idpublicacao;
-    private long idtipopublicacao;
     private String nomepublicacao;
     private String atributos;
     private String ano;
     private Date datacadastro;
+    private String publicador;
     @OneToMany(mappedBy="publicacao")
     @JsonManagedReference
     private List<PublicacaoCampos> campos;
@@ -31,8 +31,8 @@ public class Publicacao {
     @JsonManagedReference
     private List<Pesquisador> pesquisadores;
 
-    @OneToOne(mappedBy = "publicacao")
-    @JsonManagedReference
+    @ManyToOne(optional = true,cascade = CascadeType.ALL)
+    @JoinColumn(name="idtipopublicacao")
     private TipoPublicacao tipoPublicacao;
 
     public long getIdpublicacao() {
@@ -79,8 +79,6 @@ public class Publicacao {
     }
 
     public void setTipoPublicacao(TipoPublicacao tipoPublicacao) {
-        if(tipoPublicacao != null)
-            this.idtipopublicacao = tipoPublicacao.getIdtipopublicacao();
         this.tipoPublicacao = tipoPublicacao;
     }
 
@@ -90,5 +88,27 @@ public class Publicacao {
 
     public void setPesquisadores(List<Pesquisador> pesquisadores) {
         this.pesquisadores = pesquisadores;
+    }
+
+    public String getPublicador() {
+        return publicador;
+    }
+
+    public void setPublicador(String publicador) {
+        this.publicador = publicador;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Publicacao that = (Publicacao) obj;
+        return idpublicacao == that.idpublicacao;
+    }
+    @Override
+    public int hashCode() {
+        return (int)idpublicacao;
     }
 }

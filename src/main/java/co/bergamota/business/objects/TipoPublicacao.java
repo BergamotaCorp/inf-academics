@@ -2,7 +2,10 @@ package co.bergamota.business.objects;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tipopublicacao")
@@ -11,10 +14,6 @@ public class TipoPublicacao {
     @GeneratedValue
     private long idtipopublicacao;
     private String nometipopublicacao;
-    @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idtipopublicacao")
-    @JsonBackReference
-    private Publicacao publicacao;
 
     public long getIdtipopublicacao() {
         return idtipopublicacao;
@@ -30,13 +29,5 @@ public class TipoPublicacao {
 
     public void setNometipopublicacao(String nometipopublicacao) {
         this.nometipopublicacao = nometipopublicacao;
-    }
-
-    public Publicacao getPublicacao() {
-        return publicacao;
-    }
-
-    public void setPublicacao(Publicacao publicacao) {
-        this.publicacao = publicacao;
     }
 }

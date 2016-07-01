@@ -1,0 +1,56 @@
+{% extends "classpath:/templates/layout.twig" %}
+
+{% block title %}Editar Publicação{% endblock %}
+{% block head %}{% endblock %}
+
+{% block container %}
+    <div class="container editar-publicacao-container">
+        <form method="post" action="/editar/{{ model.getIdpublicacao() }}">
+            <input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"/>
+            <fieldset class="form-group">
+                <label for="idpesquisador">Pesquisadores</label>
+                <input type="text" class="form-control" id="idpesquisador" name="idpesquisador" placeholder="Pesquisadores" value="" required>
+                <script>
+                    function AddPesquisadoresToSelection(){
+                        EditarPublicacao.msidpesquisador.addToSelection({{ convert_encoding(pesquisadores,'UTF-8','ISO-8859-1') }}, false);
+                    }
+                </script>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="idtipopublicacao">Tipo de Publicação</label>
+                <input type="text" class="form-control" id="idtipopublicacao" name="idtipopublicacao" placeholder="Tipo de Publicação" required>
+                <small class="text-muted">Ex.: Artigo, Livro, etc</small>
+                <script>
+                    function AddTipoPublicacaoToSelection(){
+                        EditarPublicacao.msidtipopublicacao.addToSelection([{ idtipopublicacao: "{{ model.getTipoPublicacao().getIdtipopublicacao() }}", nometipopublicacao: "{{ model.getTipoPublicacao().getNometipopublicacao() }}" }], false);
+                    }
+                </script>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="nomepublicacao">Título da Publicação</label>
+                <input type="text" class="form-control" id="nomepublicacao" name="nomepublicacao" placeholder="Título da Publicação" required value="{{ model.getNomepublicacao() }}">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="ano">Ano da Publicação</label>
+                <input type="number" class="form-control" id="ano" name="ano" placeholder="Ano da Publicação" required>
+                <script>
+                    function AddAnoToSelection(){
+                        EditarPublicacao.msano.addToSelection([ { id : "{{ convert_encoding(model.getAno(),'UTF-8','ISO-8859-1') }}", name : "{{ convert_encoding(model.getAno(),'UTF-8','ISO-8859-1') }}"}  ] , false);
+                    }
+                </script>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="publicador">Publicador</label>
+                <input type="text" class="form-control" id="publicador" name="publicador" placeholder="Journal ou Evento em que foi publicado" required value="{{ model.getPublicador() }}">
+            </fieldset>
+            <div class="row">
+                <div class="col-xs-6"></div>
+                <div class="col-xs-6">
+                    <button type="submit" class="btn btn-primary pull-xs-right">Salvar</button>
+                </div>
+            </div>
+            <span class="clearfix"></span>
+            <hr>
+        </form>
+    </div><!--/.container-->
+{% endblock %}

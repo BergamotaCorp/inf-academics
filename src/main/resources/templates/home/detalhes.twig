@@ -7,11 +7,7 @@
     <div class="container detallhes-publicacao-container">
         <h1>{{ model.nomepublicacao }}</h1>
         <hr>
-        <p><b>Autores</b>
-                {%  for key,value in model.getPesquisadores() %}
-                    {{ value.getNomepesquisador() }},
-                {% endfor %}
-        </p>
+        <p><b>Autores</b> {{ convert_encoding(pesquisadores,'UTF-8','ISO-8859-1')  }}</p>
         <p><b>Publicado em</b> {{ model.ano }} <b>em</b> {{ model.publicador|default('desconhecido') }}</p>
         <p><b>Publicação cadastrada em</b> {{ model.datacadastro}}</p>
         <h3>Outros Campos</h3>
@@ -22,7 +18,7 @@
         {% if (canEdit) %}
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-primary pull-xs-right">Editar</button>
+                    <a href="/editar/{{ model.idpublicacao }}" class="btn btn-primary pull-xs-right">Editar</a>
                 </div>
             </div>
         {% endif %}
