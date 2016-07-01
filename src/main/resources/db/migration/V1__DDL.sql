@@ -52,7 +52,7 @@ ENGINE = InnoDB;
 -- Table `infacademics`.`TipoPublicacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `infacademics`.`tipopublicacao` (
-  `idtipopublicacao` INT NOT NULL,
+  `idtipopublicacao` INT NOT NULL AUTO_INCREMENT,
   `nometipopublicacao` VARCHAR(45) NULL,
   PRIMARY KEY (`idtipopublicacao`))
 ENGINE = InnoDB;

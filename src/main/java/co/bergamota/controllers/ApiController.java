@@ -101,6 +101,7 @@ public class ApiController {
                 String nomeTipoPublicacao = entry.getType().getValue().toString();
                 TipoPublicacao tipoPublicacao = tipoPublicacaoRepository.findByNometipopublicacao(nomeTipoPublicacao);
                 if(tipoPublicacao == null){
+                    tipoPublicacao = new TipoPublicacao();
                     tipoPublicacao.setNometipopublicacao(nomeTipoPublicacao);
                     tipoPublicacaoRepository.save(tipoPublicacao);
                 }
