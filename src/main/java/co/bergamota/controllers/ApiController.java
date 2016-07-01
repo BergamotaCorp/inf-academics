@@ -71,7 +71,7 @@ public class ApiController {
 
     @Transactional(rollbackOn = Exception.class)
     @RequestMapping(value = "/importar-publicacoes", method = RequestMethod.POST)
-    public String importarPublicacoes(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
+    public String importarPublicacoes(@RequestParam("file") MultipartFile file, HttpServletResponse response) throws IOException {
         if (!file.isEmpty()) try {
             //Files.copy(file.getInputStream(), Paths.get("src/main/resources/upload-dir", file.getOriginalFilename()));
             Reader reader = new InputStreamReader(file.getInputStream());
@@ -122,22 +122,26 @@ public class ApiController {
                 publicacao.setDatacadastro(new Date());
                 publicacaoRepository.save(publicacao);
 
+                publicacao.setCampos(new ArrayList<>());
+
                 for(Key atributo : atributos){
                     if(entry.getField(atributo) == null) continue;
-                    PublicacaoCampos publicacaoCampos = new PublicacaoCampos(){{
-                        setNomecampo(atributo.getValue());
-                        setValorcampo(entry.getField(atributo).toUserString());
-                        setPublicacao(publicacao);
-                    }};
-                    //publicacaoCamposRepository.save(publicacaoCampos);
+                    PublicacaoCampos publicacaoCampos = new PublicacaoCampos();
+                    publicacaoCampos.setNomecampo(atributo.getValue());
+                    publicacaoCampos.setValorcampo(entry.getField(atributo).toUserString());
+                    publicacaoCampos.setPublicacao(publicacao);
+                    publicacao.getCampos().add(publicacaoCampos);
+                    publicacaoCamposRepository.save(publicacaoCampos);
+                    publicacaoRepository.save(publicacao);
                 }
             }
 
             response.setStatus(HttpServletResponse.SC_OK);
             return "Upload executado com sucesso";
         } catch (IOException | RuntimeException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return "Não foi possívell executar o upload do arquivo";
+            throw e;
+            //response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            //return "Não foi possívell executar o upload do arquivo";
         } catch (ParseException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return "Arquivo Bibtex inválido\n\n" + e.getMessage();

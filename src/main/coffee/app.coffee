@@ -22,7 +22,7 @@ class Publicacoes
               <div class="col-xs-12">
                   <h2 style="border-bottom: solid 1px;">#{item.nomepublicacao}</h2>
                   <p><b>Autores</b> #{item.pesquisadores.map (el) => el.nomepesquisador}</p>
-                  <p><a class="btn btn-secondary" href="#" role="button">Detalhes &raquo;</a></p>
+                  <p><a class="btn btn-secondary" href="/detalhes/#{item.idpublicacao}" role="button">Detalhes &raquo;</a></p>
               </div>
           </div>
         """
@@ -46,7 +46,7 @@ class Publicacoes
                 <div class="col-xs-12">
                     <h2 style="border-bottom: solid 1px;">#{item.nomepublicacao}</h2>
                     <p><b>Autores</b> #{item.pesquisadores.map (el) => el.nomepesquisador}</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Detalhes &raquo;</a></p>
+                    <p><a class="btn btn-secondary" href="/detalhes/#{item.idpublicacao}" role="button">Detalhes &raquo;</a></p>
                 </div>
             </div>
           """
