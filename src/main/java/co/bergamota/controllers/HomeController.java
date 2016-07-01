@@ -1,19 +1,16 @@
 package co.bergamota.controllers;
 
-import co.bergamota.business.objects.Pesquisador;
-import co.bergamota.business.objects.Publicacao;
-import co.bergamota.business.objects.PublicacaoCampos;
-import co.bergamota.business.objects.Usuario;
+import co.bergamota.business.objects.*;
 import co.bergamota.dataaccess.*;
 import co.bergamota.modelview.PublicacaoModelView;
 import co.bergamota.modelview.SignUpModelView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,5 +56,16 @@ public class HomeController {
         publicacao.setDatacadastro(new Date());
         publicacaoRepository.save(publicacao);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
+    public String cadastrarPublicacaoAction(@PathVariable("id") Long id, ModelMap model) {
+        Publicacao publicacao = publicacaoRepository.findOne(id);
+        model.addAttribute("model", publicacao);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("canEdit", publicacao.getPesquisadores().stream().anyMatch(p -> p.getIdpesquisador() == ((Credenciais)auth.getPrincipal()).getId()));
+
+        return "home/detalhes";
     }
 }

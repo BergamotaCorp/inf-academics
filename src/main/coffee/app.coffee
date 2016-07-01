@@ -1,8 +1,16 @@
 
 class Publicacoes
+  @searchTimeout : null
   constructor : () ->
     $('.search-trigger').click () =>
       this.search $('input[name="search-value"]').val()
+    $('input[name="search-value"]').on 'keyup', () =>
+      if Publicacoes.searchTimeout != null
+        clearTimeout Publicacoes.searchTimeout
+      Publicacoes.searchTimeout = setTimeout () =>
+        Publicacoes.searchTimeout = null
+        this.search $('input[name="search-value"]').val()
+      , 200
 
   getAll : () ->
     $.get '/api/publicacoes/getAll', (data) ->
@@ -14,7 +22,7 @@ class Publicacoes
               <div class="col-xs-12">
                   <h2 style="border-bottom: solid 1px;">#{item.nomepublicacao}</h2>
                   <p><b>Autores</b> #{item.pesquisadores.map (el) => el.nomepesquisador}</p>
-                  <p><a class="btn btn-secondary" href="#" role="button">Detalhes &raquo;</a></p>
+                  <p><a class="btn btn-secondary" href="/detalhes/#{item.idpublicacao}" role="button">Detalhes &raquo;</a></p>
               </div>
           </div>
         """
@@ -38,7 +46,7 @@ class Publicacoes
                 <div class="col-xs-12">
                     <h2 style="border-bottom: solid 1px;">#{item.nomepublicacao}</h2>
                     <p><b>Autores</b> #{item.pesquisadores.map (el) => el.nomepesquisador}</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Detalhes &raquo;</a></p>
+                    <p><a class="btn btn-secondary" href="/detalhes/#{item.idpublicacao}" role="button">Detalhes &raquo;</a></p>
                 </div>
             </div>
           """

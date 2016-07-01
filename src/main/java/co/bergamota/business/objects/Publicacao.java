@@ -18,7 +18,7 @@ public class Publicacao {
     private long idtipopublicacao;
     private String nomepublicacao;
     private String atributos;
-    private Integer ano;
+    private String ano;
     private Date datacadastro;
     @OneToMany(mappedBy="publicacao")
     @JsonManagedReference
@@ -53,10 +53,10 @@ public class Publicacao {
     public void setAtributos(String atributos) {
         this.atributos = atributos;
     }
-    public Integer getAno() {
+    public String getAno() {
         return ano;
     }
-    public void setAno(Integer ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
     public Date getDatacadastro() {
