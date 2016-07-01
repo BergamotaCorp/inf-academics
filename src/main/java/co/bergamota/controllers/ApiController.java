@@ -1,21 +1,30 @@
 package co.bergamota.controllers;
 
-import co.bergamota.business.objects.Pesquisador;
-import co.bergamota.business.objects.Publicacao;
-import co.bergamota.business.objects.TipoPublicacao;
-import co.bergamota.business.objects.Usuario;
-import co.bergamota.dataaccess.PesquisadorRepository;
-import co.bergamota.dataaccess.PublicacaoRepository;
-import co.bergamota.dataaccess.TipoPublicacaoRepository;
-import co.bergamota.dataaccess.UsuarioRepository;
+import co.bergamota.business.objects.*;
+import co.bergamota.dataaccess.*;
 import com.google.common.collect.Lists;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
+
+import org.jbibtex.*;
 
 @RestController
 @RequestMapping("/api")
@@ -28,6 +37,9 @@ public class ApiController {
 
     @Autowired
     PublicacaoRepository publicacaoRepository;
+
+    @Autowired
+    PublicacaoCamposRepository publicacaoCamposRepository;
 
     @Autowired
     TipoPublicacaoRepository tipoPublicacaoRepository;
@@ -57,5 +69,80 @@ public class ApiController {
         return Lists.newArrayList(tipoPublicacaoRepository.findAll());
     }
 
+    @Transactional(rollbackOn = Exception.class)
+    @RequestMapping(value = "/importar-publicacoes", method = RequestMethod.POST)
+    public String importarPublicacoes(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
+        if (!file.isEmpty()) try {
+            //Files.copy(file.getInputStream(), Paths.get("src/main/resources/upload-dir", file.getOriginalFilename()));
+            Reader reader = new InputStreamReader(file.getInputStream());
+            BibTeXParser bibtexParser = new BibTeXParser();
+            BibTeXDatabase database = bibtexParser.parse(reader);
 
+            Map<Key, BibTeXEntry> entryMap = database.getEntries();
+
+            Collection<BibTeXEntry> entries = entryMap.values();
+            ArrayList<Key> atributos = new ArrayList<>();
+
+            for(Field field : BibTeXEntry.class.getDeclaredFields()){
+                try {
+                    if(field.getType() == Key.class) atributos.add((Key)field.get(null));
+                } catch (IllegalAccessException e) {
+                    continue;
+                }
+            }
+
+            for (BibTeXEntry entry : entries) {
+
+                Publicacao publicacao = new Publicacao();
+                publicacao.setAno(entry.getField(BibTeXEntry.KEY_YEAR).toUserString());
+                publicacao.setDatacadastro(new Date());
+                publicacao.setNomepublicacao(entry.getField(BibTeXEntry.KEY_TITLE).toUserString());
+
+                String nomeTipoPublicacao = entry.getType().getValue().toString();
+                TipoPublicacao tipoPublicacao = tipoPublicacaoRepository.findByNometipopublicacao(nomeTipoPublicacao);
+                if(tipoPublicacao == null){
+                    tipoPublicacao.setNometipopublicacao(nomeTipoPublicacao);
+                    tipoPublicacaoRepository.save(tipoPublicacao);
+                }
+                publicacao.setTipoPublicacao(tipoPublicacao);
+
+                ArrayList<Pesquisador> pesquisadores = new ArrayList<>();
+                String[] nomePesquisadores = entry.getField(BibTeXEntry.KEY_AUTHOR).toUserString().split(" and ");
+                for(String nomePesquisador : nomePesquisadores){
+                    Pesquisador pesquisador = pesquisadorRepository.findByNomepesquisador(nomePesquisador.trim());
+                    if(pesquisador == null){
+                        pesquisador = new Pesquisador();
+                        pesquisador.setNomepesquisador(nomePesquisador.trim());
+                        pesquisador.setDatacadastro(new Date());
+                        pesquisadorRepository.save(pesquisador);
+                    }
+                    pesquisadores.add(pesquisador);
+                }
+                publicacao.setPesquisadores(pesquisadores);
+                publicacao.setDatacadastro(new Date());
+                publicacaoRepository.save(publicacao);
+
+                for(Key atributo : atributos){
+                    if(entry.getField(atributo) == null) continue;
+                    PublicacaoCampos publicacaoCampos = new PublicacaoCampos(){{
+                        setNomecampo(atributo.getValue());
+                        setValorcampo(entry.getField(atributo).toUserString());
+                        setPublicacao(publicacao);
+                    }};
+                    //publicacaoCamposRepository.save(publicacaoCampos);
+                }
+            }
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            return "Upload executado com sucesso";
+        } catch (IOException | RuntimeException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Não foi possívell executar o upload do arquivo";
+        } catch (ParseException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Arquivo Bibtex inválido\n\n" + e.getMessage();
+        }
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        return "Não foi possívell executar o upload do arquivo porque ele está vazio";
+    }
 }

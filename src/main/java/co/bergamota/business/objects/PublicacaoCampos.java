@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class PublicacaoCampos {
 	
 	@Id
+    @GeneratedValue
 	private long idpublicacaocampos;
 	private String nomecampo;
 	private String valorcampo;

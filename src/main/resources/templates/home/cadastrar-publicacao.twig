@@ -4,7 +4,7 @@
 {% block head %}{% endblock %}
 
 {% block container %}
-    <div class="container">
+    <div class="container cadastro-publicacao-container">
         <form method="post" action="/cadastrar-publicacao">
             <input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"/>
             <fieldset class="form-group">
@@ -28,10 +28,25 @@
                 <label for="publicador">Publicador</label>
                 <input type="text" class="form-control" id="publicador" name="publicador" placeholder="Journal ou Evento em que foi publicado" required>
             </fieldset>
+            <div class="row">
+                <div class="col-xs-6">
+                    <button type="button" id="importar-bibtex" class="btn btn-secondary pull-xs-left">Importar BibTex</button>
+                </div>
+                <div class="col-xs-6"><button type="submit" class="btn btn-primary pull-xs-right">Cadastrar</button></div>
+            </div>
 
-            <button type="submit" class="btn btn-primary pull-xs-right">Cadastrar</button>
             <span class="clearfix"></span>
             <hr>
         </form>
+
+        <form action="/api/importar-publicacoes" id="bibtex-import-form" method="post" enctype="multipart/form-data">
+            <div class="hiddenfile">
+                <input type="file" id="bibtex-file" name="file" accept=".bib">
+            </div>
+        </form>
+        <div class="uploading" style="display: none;">
+            Progresso
+            <progress class="progress" value="25" max="100">25%</progress>
+        </div>
     </div><!--/.container-->
 {% endblock %}

@@ -1,8 +1,16 @@
 
 class Publicacoes
+  @searchTimeout : null
   constructor : () ->
     $('.search-trigger').click () =>
       this.search $('input[name="search-value"]').val()
+    $('input[name="search-value"]').on 'keyup', () =>
+      if Publicacoes.searchTimeout != null
+        clearTimeout Publicacoes.searchTimeout
+      Publicacoes.searchTimeout = setTimeout () =>
+        Publicacoes.searchTimeout = null
+        this.search $('input[name="search-value"]').val()
+      , 200
 
   getAll : () ->
     $.get '/api/publicacoes/getAll', (data) ->
