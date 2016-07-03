@@ -1,5 +1,22 @@
 # Inf Academics by Bergamota Corp
 
+# Para publicação
+
+## Pré-Requisitos
+
+Docker Engine  
+Git
+
+## Instalação
+
+$ git clone https://github.com/BergamotaCorp/inf-academics.git & cd $_
+$ docker run --name mysql -e MYSQL_ROOT_PASSWORD=s3cr3t -d mysql:latest  
+$ docker exec $(docker ps -aqf "name=mysql") mysql -uroot -ps3cr3t -ne "CREATE SCHEMA teste;GRANT ALL ON teste.* TO 'root'@'%'"  
+$ docker build -t infacademics .
+$ docker run -p 80:8080 --name infacademics8 -d infacademics  
+
+# Para desenvolvimento
+
 ## Pré-Requisitos
 
 Node 4.4+  
