@@ -13,7 +13,7 @@ $ git clone https://github.com/BergamotaCorp/inf-academics.git inf-academics && 
 $ docker run --name mysql -e MYSQL_ROOT_PASSWORD=s3cr3t -d mysql:latest  && sleep 30  
 $ docker exec $(docker ps -aqf "name=mysql") mysql -uroot -ps3cr3t -ne "CREATE SCHEMA infacademics;GRANT ALL ON infacademics.* TO 'root'@'%' IDENTIFIED BY '';"  
 $ DB_HOST=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -aqf "name=mysql"))  
-$ docker build --build-arg DB_HOST=$DB_HOST -t infacademics .
+$ docker build --build-arg DB_HOST=$DB_HOST -t infacademics .  
 $ docker run -p 80:8080 -e "DB_HOST=$DB_HOST" --name infacademics -d infacademics  
 
 # Para desenvolvimento
