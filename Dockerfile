@@ -2,6 +2,10 @@
 
 FROM java:8-jdk-alpine
 
+ARG DB_HOST 
+
+RUN export DB_HOST=${DB_HOST}
+
 COPY . /opt/app
 WORKDIR /opt/app
 

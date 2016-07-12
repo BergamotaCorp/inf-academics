@@ -22,7 +22,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 flyway {
-    url = 'jdbc:mysql://localhost/infacademics'
+    url = 'jdbc:mysql://' + (System.env.DB_HOST ?: 'localhost') + '/infacademics'
     user = 'root'
 }
 
@@ -59,6 +59,7 @@ dependencies {
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('junit:junit')
 }
+
 
 bootRun {
     addResources = true
