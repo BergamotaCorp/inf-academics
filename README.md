@@ -20,7 +20,7 @@ $ docker run -p 80:8080 --name infacademics --link mysql:mysql -d infacademics
 ## Pré-Requisitos
 
 Node 4.4+  
-MySQL 5.5 (Criar usuário sem root sem senha para localhost)
+MySQL 5.5 (Criar usuário root sem senha para localhost)
 
 ## Instalação
 
