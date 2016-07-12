@@ -9,7 +9,7 @@ Git
 
 ## Instalação
 
-$ git clone https://github.com/BergamotaCorp/inf-academics.git & cd $_  
+$ git clone https://github.com/BergamotaCorp/inf-academics.git && cd $_  
 $ docker run --name mysql -e MYSQL_ROOT_PASSWORD=s3cr3t -d mysql:latest  
 $ docker exec $(docker ps -aqf "name=mysql") mysql -uroot -ps3cr3t -ne "CREATE SCHEMA infacademics;GRANT ALL ON infacademics.* TO 'root'@'%'"  
 $ docker build -t infacademics .  
